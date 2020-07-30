@@ -1,3 +1,4 @@
+import 'package:chat_app/wigdets/gradient_button.dart';
 import 'package:chat_app/wigdets/input_decoration.dart';
 import 'package:chat_app/wigdets/text_style.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final formKey = GlobalKey<FormState>();
   TextEditingController txtName = TextEditingController();
   TextEditingController txtEmail = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
@@ -28,24 +30,31 @@ class _SignUpState extends State<SignUp> {
               SizedBox(
                 height: 30,
               ),
-              TextField(
-                  controller: txtName,
-                  style: simpleTextStyle(),
-                  decoration: buildInputDecoration("Username")),
-              SizedBox(
-                height: 12,
+              Form(
+                key: formKey,
+                child: Column(
+                  children: <Widget>[
+                    TextFormField(
+                        controller: txtName,
+                        style: simpleTextStyle(),
+                        decoration: buildInputDecoration("Username")),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    TextFormField(
+                        controller: txtEmail,
+                        style: simpleTextStyle(),
+                        decoration: buildInputDecoration("Email")),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    TextFormField(
+                        controller: txtPassword,
+                        style: simpleTextStyle(),
+                        decoration: buildInputDecoration("Password")),
+                  ],
+                ),
               ),
-              TextField(
-                  controller: txtEmail,
-                  style: simpleTextStyle(),
-                  decoration: buildInputDecoration("Email")),
-              SizedBox(
-                height: 12,
-              ),
-              TextField(
-                  controller: txtPassword,
-                  style: simpleTextStyle(),
-                  decoration: buildInputDecoration("password")),
               SizedBox(
                 height: 12,
               ),
@@ -57,30 +66,16 @@ class _SignUpState extends State<SignUp> {
               SizedBox(
                 height: 8,
               ),
-              Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(vertical: 20),
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Color(0xff374ABE), Color(0xff64B6FF)],
-                    ),
-                    borderRadius: BorderRadius.circular(30)),
-                child: Text("Sign up", style: simpleTextStyle()),
-              ),
+              GestureDetector(
+                  onTap: () {
+
+                  }, child: buildGradientBtn(context, "Sign Up")),
               SizedBox(
                 height: 12,
               ),
-              Container(
-                alignment: Alignment.center,
-                width: MediaQuery.of(context).size.width,
-                padding: EdgeInsets.symmetric(vertical: 20),
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Color(0xffffffff), Color(0xffefffff)],
-                    ),
-                    borderRadius: BorderRadius.circular(30)),
-                child: Text("Sign up with Google", style: mediumTextStyle()),
+              GestureDetector(
+                onTap: () {},
+                child: buildWhiteGradientBtn(context, "Sign up with Google"),
               ),
               SizedBox(
                 height: 16,

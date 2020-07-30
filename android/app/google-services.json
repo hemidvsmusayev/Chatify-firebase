@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "375910091207",
+    "firebase_url": "https://chatifyfull.firebaseio.com",
+    "project_id": "chatifyfull",
+    "storage_bucket": "chatifyfull.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375910091207:android:b1983f460bc84ec2f171e2",
+        "android_client_info": {
+          "package_name": "com.example.chat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "375910091207-p6r8sl6er7dt85hjfdb4hlkhsqse4gi3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuMYpUzUKilVqynuGqdDaoUxQr2Xm90eE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "375910091207-p6r8sl6er7dt85hjfdb4hlkhsqse4gi3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

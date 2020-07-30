@@ -62,8 +62,13 @@ class _SignInState extends State<SignIn> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text("Don't have an account?", style: simpleTextStyle()),
-                  Text("Register now",  style: TextStyle(decoration: TextDecoration.underline, color: Colors.white),)
+                  Text("Don't have an account? ", style: simpleTextStyle()),
+                  Text(
+                    "Register now",
+                    style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        color: Colors.white),
+                  )
                 ],
               )
             ],

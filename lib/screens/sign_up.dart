@@ -36,6 +36,11 @@ class _SignUpState extends State<SignUp> {
                   children: <Widget>[
                     TextFormField(
                         controller: txtName,
+                        validator: (val) {
+                          return val.isEmpty || val.length < 4
+                              ? "Enter correct name"
+                              : null;
+                        },
                         style: simpleTextStyle(),
                         decoration: buildInputDecoration("Username")),
                     SizedBox(
@@ -43,6 +48,12 @@ class _SignUpState extends State<SignUp> {
                     ),
                     TextFormField(
                         controller: txtEmail,
+                        validator: (val) {
+                          return RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                              .hasMatch(val) ?
+                          null : "Enter correct email";
+                        },
                         style: simpleTextStyle(),
                         decoration: buildInputDecoration("Email")),
                     SizedBox(
@@ -50,6 +61,12 @@ class _SignUpState extends State<SignUp> {
                     ),
                     TextFormField(
                         controller: txtPassword,
+                        obscureText: true,
+                        validator: (val) {
+                          return val.length < 6
+                              ? null
+                              : "Password must be 6+ chatarcter ";
+                        },
                         style: simpleTextStyle(),
                         decoration: buildInputDecoration("Password")),
                   ],
@@ -68,7 +85,7 @@ class _SignUpState extends State<SignUp> {
               ),
               GestureDetector(
                   onTap: () {
-
+                    ///
                   }, child: buildGradientBtn(context, "Sign Up")),
               SizedBox(
                 height: 12,
@@ -97,5 +114,11 @@ class _SignUpState extends State<SignUp> {
         ),
       ),
     );
+  }
+
+  signUp() {
+    if (formKey.currentState.validate()) {
+
+    }
   }
 }

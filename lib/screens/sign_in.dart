@@ -1,4 +1,3 @@
-import 'package:chat_app/wigdets/app_bar.dart';
 import 'package:chat_app/wigdets/gradient_button.dart';
 import 'package:chat_app/wigdets/input_decoration.dart';
 import 'package:chat_app/wigdets/text_style.dart';

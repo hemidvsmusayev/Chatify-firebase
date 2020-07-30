@@ -1,3 +1,4 @@
+import 'package:chat_app/services/authentication.dart';
 import 'package:chat_app/wigdets/gradient_button.dart';
 import 'package:chat_app/wigdets/input_decoration.dart';
 import 'package:chat_app/wigdets/text_style.dart';
@@ -9,6 +10,9 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  bool isLoading = false;
+  AuthMetods authMetods = AuthMetods();
+
   final formKey = GlobalKey<FormState>();
   TextEditingController txtName = TextEditingController();
   TextEditingController txtEmail = TextEditingController();
@@ -17,108 +21,124 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height - 40,
-          padding: EdgeInsets.all(24),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Container(
-                  alignment: Alignment.centerLeft,
-                  child: Text("Sign up", style: largeTextStyle())),
-              SizedBox(
-                height: 30,
-              ),
-              Form(
-                key: formKey,
+      body: isLoading
+          ? Center(
+              child: Container(
+              child: CircularProgressIndicator(),
+            ))
+          : SingleChildScrollView(
+              child: Container(
+                height: MediaQuery.of(context).size.height - 40,
+                padding: EdgeInsets.all(24),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    TextFormField(
-                        controller: txtName,
-                        validator: (val) {
-                          return val.isEmpty || val.length < 4
-                              ? "Enter correct name"
-                              : null;
-                        },
-                        style: simpleTextStyle(),
-                        decoration: buildInputDecoration("Username")),
+                    Container(
+                        alignment: Alignment.centerLeft,
+                        child: Text("Sign up", style: largeTextStyle())),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Form(
+                      key: formKey,
+                      child: Column(
+                        children: <Widget>[
+                          TextFormField(
+                              controller: txtName,
+                              validator: (val) {
+                                return val.isEmpty || val.length < 4
+                                    ? "Enter correct name"
+                                    : null;
+                              },
+                              style: simpleTextStyle(),
+                              decoration: buildInputDecoration("Username")),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          TextFormField(
+                              controller: txtEmail,
+                              validator: (val) {
+                                return RegExp(
+                                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                        .hasMatch(val)
+                                    ? null
+                                    : "Enter correct email";
+                              },
+                              style: simpleTextStyle(),
+                              decoration: buildInputDecoration("Email")),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          TextFormField(
+                              controller: txtPassword,
+                              obscureText: true,
+                              validator: (val) {
+                                return val.length > 6
+                                    ? null
+                                    : "Password must be 6+ character ";
+                              },
+                              style: simpleTextStyle(),
+                              decoration: buildInputDecoration("Password")),
+                        ],
+                      ),
+                    ),
                     SizedBox(
                       height: 12,
                     ),
-                    TextFormField(
-                        controller: txtEmail,
-                        validator: (val) {
-                          return RegExp(
-                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                              .hasMatch(val) ?
-                          null : "Enter correct email";
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      alignment: Alignment.centerRight,
+                      child: Text("Forgot password", style: simpleTextStyle()),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    GestureDetector(
+                        onTap: () {
+                          signUp();
                         },
-                        style: simpleTextStyle(),
-                        decoration: buildInputDecoration("Email")),
+                        child: buildGradientBtn(context, "Sign Up")),
                     SizedBox(
                       height: 12,
                     ),
-                    TextFormField(
-                        controller: txtPassword,
-                        obscureText: true,
-                        validator: (val) {
-                          return val.length < 6
-                              ? null
-                              : "Password must be 6+ chatarcter ";
-                        },
-                        style: simpleTextStyle(),
-                        decoration: buildInputDecoration("Password")),
+                    GestureDetector(
+                      onTap: () {},
+                      child:
+                          buildWhiteGradientBtn(context, "Sign up with Google"),
+                    ),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text("Already have account? ",
+                            style: simpleTextStyle()),
+                        Text(
+                          "Sign in now",
+                          style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              color: Colors.white),
+                        )
+                      ],
+                    )
                   ],
                 ),
               ),
-              SizedBox(
-                height: 12,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                alignment: Alignment.centerRight,
-                child: Text("Forgot password", style: simpleTextStyle()),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              GestureDetector(
-                  onTap: () {
-                    ///
-                  }, child: buildGradientBtn(context, "Sign Up")),
-              SizedBox(
-                height: 12,
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: buildWhiteGradientBtn(context, "Sign up with Google"),
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("Already have account? ", style: simpleTextStyle()),
-                  Text(
-                    "Sign in now",
-                    style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        color: Colors.white),
-                  )
-                ],
-              )
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 
   signUp() {
     if (formKey.currentState.validate()) {
-
+      setState(() {
+        isLoading = true;
+      });
+      authMetods.signUpWithEmailAndPassword(txtEmail.text, txtPassword.text)
+          .then((value) {
+        print("$value");
+      });
     }
   }
 }

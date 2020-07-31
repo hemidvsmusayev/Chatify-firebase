@@ -93,7 +93,9 @@ class _SignInState extends State<SignIn> {
                       height: 8,
                     ),
                     GestureDetector(
-                      onTap: signIn(),
+                      onTap: () {
+                        signMeIn();
+                      },
                       child: buildGradientBtn(context, "Sign in"),
                     ),
                     SizedBox(
@@ -135,7 +137,7 @@ class _SignInState extends State<SignIn> {
     );
   }
 
-  signIn() async {
+  signMeIn() async {
     if (formKey.currentState.validate()) {
       setState(() {
         isLoading = true;

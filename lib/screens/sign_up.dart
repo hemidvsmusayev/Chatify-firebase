@@ -1,10 +1,16 @@
+import 'package:chat_app/screens/chat_room.dart';
 import 'package:chat_app/services/authentication.dart';
+import 'package:chat_app/services/validators.dart';
 import 'package:chat_app/wigdets/gradient_button.dart';
 import 'package:chat_app/wigdets/input_decoration.dart';
 import 'package:chat_app/wigdets/text_style.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
+  final Function toggle;
+
+  SignUp(this.toggle);
+
   @override
   _SignUpState createState() => _SignUpState();
 }
@@ -23,16 +29,16 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       body: isLoading
           ? Center(
-              child: Container(
-              child: CircularProgressIndicator(),
-            ))
+          child: Container(
+            child: CircularProgressIndicator(),
+          ))
           : SingleChildScrollView(
-              child: Container(
-                height: MediaQuery.of(context).size.height - 40,
-                padding: EdgeInsets.all(24),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
+        child: Container(
+          height: MediaQuery.of(context).size.height - 40,
+          padding: EdgeInsets.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
                     Container(
                         alignment: Alignment.centerLeft,
                         child: Text("Sign up", style: largeTextStyle())),
@@ -46,9 +52,7 @@ class _SignUpState extends State<SignUp> {
                           TextFormField(
                               controller: txtName,
                               validator: (val) {
-                                return val.isEmpty || val.length < 4
-                                    ? "Enter correct name"
-                                    : null;
+                                return Validator().validateName(val);
                               },
                               style: simpleTextStyle(),
                               decoration: buildInputDecoration("Username")),
@@ -58,11 +62,7 @@ class _SignUpState extends State<SignUp> {
                           TextFormField(
                               controller: txtEmail,
                               validator: (val) {
-                                return RegExp(
-                                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                        .hasMatch(val)
-                                    ? null
-                                    : "Enter correct email";
+                                return Validator().validateEmail(val);
                               },
                               style: simpleTextStyle(),
                               decoration: buildInputDecoration("Email")),
@@ -73,9 +73,7 @@ class _SignUpState extends State<SignUp> {
                               controller: txtPassword,
                               obscureText: true,
                               validator: (val) {
-                                return val.length > 6
-                                    ? null
-                                    : "Password must be 6+ character ";
+                                return Validator().validatePassword(val);
                               },
                               style: simpleTextStyle(),
                               decoration: buildInputDecoration("Password")),
@@ -115,18 +113,26 @@ class _SignUpState extends State<SignUp> {
                       children: <Widget>[
                         Text("Already have account? ",
                             style: simpleTextStyle()),
-                        Text(
-                          "Sign in now",
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.white),
+                        GestureDetector(
+                          onTap: () {
+                            widget.toggle();
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 8),
+                            child: Text(
+                              "Sign in now",
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  color: Colors.white),
+                            ),
+                          ),
                         )
                       ],
-                    )
-                  ],
-                ),
-              ),
-            ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -137,7 +143,8 @@ class _SignUpState extends State<SignUp> {
       });
       authMetods.signUpWithEmailAndPassword(txtEmail.text, txtPassword.text)
           .then((value) {
-        print("$value");
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => ChatRoom()));
       });
     }
   }

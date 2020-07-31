@@ -12,7 +12,6 @@ import 'chat_room.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggle;
-
   SignIn(this.toggle);
 
   @override
@@ -20,14 +19,14 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  TextEditingController txtEmail = TextEditingController();
+  TextEditingController txtPassword = TextEditingController();
+
   AuthMethods authMethods = AuthMethods();
   DatabaseMethods databaseMethods = DatabaseMethods();
   QuerySnapshot snapshotUserInfo;
 
   final formKey = GlobalKey<FormState>();
-  TextEditingController txtEmail = TextEditingController();
-  TextEditingController txtPassword = TextEditingController();
-
   bool isLoading = false;
 
   @override

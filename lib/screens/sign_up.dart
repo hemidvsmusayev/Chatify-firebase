@@ -2,7 +2,6 @@ import 'package:chat_app/helper/helper_functions.dart';
 import 'package:chat_app/screens/chat_room.dart';
 import 'package:chat_app/services/authentication.dart';
 import 'package:chat_app/services/database.dart';
-import 'package:chat_app/services/validators.dart';
 import 'package:chat_app/wigdets/gradient_button.dart';
 import 'package:chat_app/wigdets/input_decoration.dart';
 import 'package:chat_app/wigdets/text_style.dart';
@@ -54,18 +53,24 @@ class _SignUpState extends State<SignUp> {
                   children: <Widget>[
                     TextFormField(
                         controller: txtName,
-                        validator: (val) {
-                          return Validator().validateName(val);
-                        },
-                        style: simpleTextStyle(),
-                        decoration: buildInputDecoration("Username")),
+                              validator: (val) {
+                                return val.isEmpty || val.length < 3
+                                    ? "Enter Username 3+ characters"
+                                    : null;
+                              },
+                              style: simpleTextStyle(),
+                              decoration: buildInputDecoration("Username")),
                     SizedBox(
                       height: 12,
                     ),
                     TextFormField(
                         controller: txtEmail,
                         validator: (val) {
-                          return Validator().validateEmail(val);
+                          return RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                              .hasMatch(val)
+                              ? null
+                              : "Please Enter Correct Email";
                         },
                         style: simpleTextStyle(),
                         decoration: buildInputDecoration("Email")),
@@ -76,7 +81,9 @@ class _SignUpState extends State<SignUp> {
                         controller: txtPassword,
                         obscureText: true,
                         validator: (val) {
-                          return Validator().validatePassword(val);
+                          return val.length > 6
+                              ? null
+                              : "Enter Password 6+ characters";
                         },
                         style: simpleTextStyle(),
                         decoration: buildInputDecoration("Password")),

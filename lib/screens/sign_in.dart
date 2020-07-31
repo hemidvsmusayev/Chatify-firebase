@@ -1,14 +1,11 @@
-import 'package:chat_app/helper/helper_functions.dart';
 import 'package:chat_app/services/authentication.dart';
 import 'package:chat_app/services/database.dart';
-import 'package:chat_app/services/validators.dart';
 import 'package:chat_app/wigdets/gradient_button.dart';
 import 'package:chat_app/wigdets/input_decoration.dart';
 import 'package:chat_app/wigdets/text_style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import 'chat_room.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggle;
@@ -51,7 +48,11 @@ class _SignInState extends State<SignIn> {
                   children: <Widget>[
                     TextFormField(
                         validator: (val) {
-                          return Validator().validateEmail(val);
+                          return RegExp(
+                                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                  .hasMatch(val)
+                              ? null
+                              : "Please Enter Correct Email";
                         },
                         controller: txtEmail,
                         style: simpleTextStyle(),
@@ -61,7 +62,9 @@ class _SignInState extends State<SignIn> {
                     ),
                     TextFormField(
                         validator: (val) {
-                          return Validator().validatePassword(val);
+                          return val.length > 6
+                              ? null
+                              : "Enter Password 6+ characters";
                         },
                         controller: txtPassword,
                         style: simpleTextStyle(),
@@ -122,28 +125,6 @@ class _SignInState extends State<SignIn> {
   }
 
   signIn() {
-    if (formKey.currentState.validate()) {
-      HelperFunctions.saveUserEmailKeyPref(txtEmail.text);
-
-      setState(() {
-        isLoading = true;
-      });
-
-      databaseMethods.getUserByUserEmail(txtEmail.text).then((val) {
-        snapshotUserInfo = val;
-        HelperFunctions.saveUserEmailKeyPref(
-            snapshotUserInfo.documents[0].data["name"]);
-      });
-
-      authMethods
-          .signInWithEmailAndPassword(txtEmail.text, txtPassword.text)
-          .then((val) {
-        if (val != null) {
-          HelperFunctions.saveUserLoggedKeyPref(true);
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => ChatRoom()));
-        }
-      });
-    }
+    formKey.currentState.validate();
   }
 }

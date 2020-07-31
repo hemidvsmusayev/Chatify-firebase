@@ -1,4 +1,6 @@
 import 'package:chat_app/helper/authenticate.dart';
+import 'package:chat_app/helper/contstants.dart';
+import 'package:chat_app/helper/helper_functions.dart';
 import 'package:chat_app/screens/search.dart';
 import 'package:chat_app/services/authentication.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,12 @@ class ChatRoom extends StatefulWidget {
 
 class _ChatRoomState extends State<ChatRoom> {
   AuthMethods authMetods = new AuthMethods();
+
+  @override
+  void initState() {
+    getUserInfo();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,5 +46,9 @@ class _ChatRoomState extends State<ChatRoom> {
         },
       ),
     );
+  }
+
+  getUserInfo() async {
+    Constants.myName = await HelperFunctions.getUserNameKeyPref();
   }
 }

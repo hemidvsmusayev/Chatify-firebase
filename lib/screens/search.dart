@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:chat_app/helper/contstants.dart';
+import 'package:chat_app/screens/conversation.dart';
 import 'package:chat_app/services/database.dart';
 import 'package:chat_app/wigdets/input_decoration.dart';
 import 'package:chat_app/wigdets/search_button.dart';
@@ -105,7 +107,7 @@ class _SearchScreenState extends State<SearchScreen> {
           Spacer(),
           GestureDetector(
             onTap: () {
-              sendMessage(userName);
+              createChatRoom(userName);
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -126,9 +128,23 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   createChatRoom(String userName) {
-    List<String> users = [userName,];
-    databaseMethods.createChatRoom(chatRoomId, chatRoomMap)
+    String chatRoomId = getChatRoomId(userName, Constants.myName);
+
+    List<String> users = [userName, Constants.myName];
+    Map<String, dynamic> chatRoomMap = {
+      "users": users,
+      "chatroomId": chatRoomId
+    };
+    databaseMethods.createChatRoom(chatRoomId, chatRoomMap);
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ConversationScreen()));
   }
 
-
+  getChatRoomId(String a, String b) {
+    if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
+      return "$b\_$a";
+    } else {
+      return "$a\_$b";
+    }
+  }
 }

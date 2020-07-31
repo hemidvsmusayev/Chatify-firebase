@@ -8,6 +8,8 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  TextEditingController searchTxt = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +33,7 @@ class _SearchScreenState extends State<SearchScreen> {
         children: <Widget>[
           Expanded(
               child: TextField(
+            controller: searchTxt,
             decoration: buildInputDecoration("search username..."),
           )),
           GestureDetector(onTap: () {}, child: buildSearchBtn()),

@@ -5,6 +5,16 @@ class DatabaseMethods {
     Firestore.instance.collection("users").add(userMap);
   }
 
+  getUserInfo(String email) async {
+    return Firestore.instance
+        .collection("users")
+        .where("email", isEqualTo: email)
+        .getDocuments()
+        .catchError((e) {
+      print(e.toString());
+    });
+  }
+
   getUserByUsername(String username) {
     return Firestore.instance
         .collection("users")

@@ -1,7 +1,14 @@
+import 'package:chat_app/helper/helper_functions.dart';
+import 'package:chat_app/services/authentication.dart';
+import 'package:chat_app/services/database.dart';
+import 'package:chat_app/services/validators.dart';
 import 'package:chat_app/wigdets/gradient_button.dart';
 import 'package:chat_app/wigdets/input_decoration.dart';
 import 'package:chat_app/wigdets/text_style.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+import 'chat_room.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggle;
@@ -13,6 +20,16 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  AuthMethods authMethods = AuthMethods();
+  DatabaseMethods databaseMethods = DatabaseMethods();
+  QuerySnapshot snapshotUserInfo;
+
+  final formKey = GlobalKey<FormState>();
+  TextEditingController txtEmail = TextEditingController();
+  TextEditingController txtPassword = TextEditingController();
+
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,15 +46,30 @@ class _SignInState extends State<SignIn> {
               SizedBox(
                 height: 50,
               ),
-              TextField(
-                  style: simpleTextStyle(),
-                  decoration: buildInputDecoration("Email")),
-              SizedBox(
-                height: 12,
+              Form(
+                key: formKey,
+                child: Column(
+                  children: <Widget>[
+                    TextFormField(
+                        validator: (val) {
+                          return Validator().validateEmail(val);
+                        },
+                        controller: txtEmail,
+                        style: simpleTextStyle(),
+                        decoration: buildInputDecoration("Email")),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    TextFormField(
+                        validator: (val) {
+                          return Validator().validatePassword(val);
+                        },
+                        controller: txtPassword,
+                        style: simpleTextStyle(),
+                        decoration: buildInputDecoration("Password")),
+                  ],
+                ),
               ),
-              TextField(
-                  style: simpleTextStyle(),
-                  decoration: buildInputDecoration("Password")),
               SizedBox(
                 height: 12,
               ),
@@ -50,7 +82,7 @@ class _SignInState extends State<SignIn> {
                 height: 8,
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: signIn(),
                 child: buildGradientBtn(context, "Sign in"),
               ),
               SizedBox(
@@ -88,5 +120,31 @@ class _SignInState extends State<SignIn> {
         ),
       ),
     );
+  }
+
+  signIn() {
+    if (formKey.currentState.validate()) {
+      HelperFunctions.saveUserEmailKeyPref(txtEmail.text);
+
+      setState(() {
+        isLoading = true;
+      });
+
+      databaseMethods.getUserByUserEmail(txtEmail.text).then((val) {
+        snapshotUserInfo = val;
+        HelperFunctions.saveUserEmailKeyPref(
+            snapshotUserInfo.documents[0].data["name"]);
+      });
+
+      authMethods
+          .signInWithEmailAndPassword(txtEmail.text, txtPassword.text)
+          .then((val) {
+        if (val != null) {
+          HelperFunctions.saveUserLoggedKeyPref(true);
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => ChatRoom()));
+        }
+      });
+    }
   }
 }

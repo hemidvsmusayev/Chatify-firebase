@@ -1,3 +1,4 @@
+import 'package:chat_app/helper/helper_functions.dart';
 import 'package:chat_app/screens/chat_room.dart';
 import 'package:chat_app/services/authentication.dart';
 import 'package:chat_app/services/database.dart';
@@ -41,95 +42,95 @@ class _SignUpState extends State<SignUp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-                    Container(
-                        alignment: Alignment.centerLeft,
-                        child: Text("Sign up", style: largeTextStyle())),
+              Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text("Sign up", style: largeTextStyle())),
+              SizedBox(
+                height: 30,
+              ),
+              Form(
+                key: formKey,
+                child: Column(
+                  children: <Widget>[
+                    TextFormField(
+                        controller: txtName,
+                        validator: (val) {
+                          return Validator().validateName(val);
+                        },
+                        style: simpleTextStyle(),
+                        decoration: buildInputDecoration("Username")),
                     SizedBox(
-                      height: 30,
+                      height: 12,
                     ),
-                    Form(
-                      key: formKey,
-                      child: Column(
-                        children: <Widget>[
-                          TextFormField(
-                              controller: txtName,
-                              validator: (val) {
-                                return Validator().validateName(val);
-                              },
-                              style: simpleTextStyle(),
-                              decoration: buildInputDecoration("Username")),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          TextFormField(
-                              controller: txtEmail,
-                              validator: (val) {
-                                return Validator().validateEmail(val);
-                              },
-                              style: simpleTextStyle(),
-                              decoration: buildInputDecoration("Email")),
-                          SizedBox(
-                            height: 12,
-                          ),
-                          TextFormField(
-                              controller: txtPassword,
-                              obscureText: true,
-                              validator: (val) {
-                                return Validator().validatePassword(val);
-                              },
-                              style: simpleTextStyle(),
-                              decoration: buildInputDecoration("Password")),
-                        ],
+                    TextFormField(
+                        controller: txtEmail,
+                        validator: (val) {
+                          return Validator().validateEmail(val);
+                        },
+                        style: simpleTextStyle(),
+                        decoration: buildInputDecoration("Email")),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    TextFormField(
+                        controller: txtPassword,
+                        obscureText: true,
+                        validator: (val) {
+                          return Validator().validatePassword(val);
+                        },
+                        style: simpleTextStyle(),
+                        decoration: buildInputDecoration("Password")),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 12,
+              ),
+              Container(
+                padding:
+                EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                alignment: Alignment.centerRight,
+                child: Text("Forgot password", style: simpleTextStyle()),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              GestureDetector(
+                  onTap: () {
+                    signUp();
+                  },
+                  child: buildGradientBtn(context, "Sign Up")),
+              SizedBox(
+                height: 12,
+              ),
+              GestureDetector(
+                onTap: () {},
+                child:
+                buildWhiteGradientBtn(context, "Sign up with Google"),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text("Already have account? ",
+                      style: simpleTextStyle()),
+                  GestureDetector(
+                    onTap: () {
+                      widget.toggle();
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 8),
+                      child: Text(
+                        "Sign in now",
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            color: Colors.white),
                       ),
                     ),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                      alignment: Alignment.centerRight,
-                      child: Text("Forgot password", style: simpleTextStyle()),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    GestureDetector(
-                        onTap: () {
-                          signUp();
-                        },
-                        child: buildGradientBtn(context, "Sign Up")),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child:
-                          buildWhiteGradientBtn(context, "Sign up with Google"),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text("Already have account? ",
-                            style: simpleTextStyle()),
-                        GestureDetector(
-                          onTap: () {
-                            widget.toggle();
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 8),
-                            child: Text(
-                              "Sign in now",
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  color: Colors.white),
-                            ),
-                          ),
-                        )
-                      ],
+                  )
+                ],
               )
             ],
           ),
@@ -145,6 +146,9 @@ class _SignUpState extends State<SignUp> {
         "email": txtEmail.text
       };
 
+      HelperFunctions.saveUserNameKeyPref(txtName.text);
+      HelperFunctions.saveUserEmailKeyPref(txtEmail.text);
+
       setState(() {
         isLoading = true;
       });
@@ -153,6 +157,8 @@ class _SignUpState extends State<SignUp> {
           .signUpWithEmailAndPassword(txtEmail.text, txtPassword.text)
           .then((value) {
         databaseMethods.uploadUserInfo(userInfoMap);
+        HelperFunctions.saveUserLoggedKeyPref(true);
+
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => ChatRoom()));
       });

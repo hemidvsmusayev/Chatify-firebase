@@ -3,6 +3,8 @@ import 'package:chat_app/helper/contstants.dart';
 import 'package:chat_app/helper/helper_functions.dart';
 import 'package:chat_app/screens/search.dart';
 import 'package:chat_app/services/authentication.dart';
+import 'package:chat_app/services/database.dart';
+import 'package:chat_app/wigdets/chats_tile.dart';
 import 'package:flutter/material.dart';
 
 class ChatRoom extends StatefulWidget {
@@ -12,10 +14,13 @@ class ChatRoom extends StatefulWidget {
 
 class _ChatRoomState extends State<ChatRoom> {
   AuthMethods authMetods = new AuthMethods();
+  DatabaseMethods databaseMethods = DatabaseMethods();
+  Stream chatsStream;
 
   @override
   void initState() {
     getUserInfo();
+    databaseMethods.getChatRoom(Constants.myName).then((value) {});
     super.initState();
   }
 
@@ -52,5 +57,19 @@ class _ChatRoomState extends State<ChatRoom> {
   getUserInfo() async {
     Constants.myName = await HelperFunctions.getUserNameKeyPref();
     setState(() {});
+  }
+
+  Widget chatRoomList() {
+    return StreamBuilder(
+      stream: chatsStream,
+      builder: (context, snapshot) {
+        return ListView.builder(
+          itemCount: snapshot.data.documents.length,
+          itemBuilder: (context, index) {
+            return ChatsTile(snapshot.data.documents[index].data["chatroomId"]);
+          },
+        );
+      },
+    );
   }
 }

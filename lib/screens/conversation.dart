@@ -1,5 +1,6 @@
 import 'package:chat_app/helper/contstants.dart';
 import 'package:chat_app/services/database.dart';
+import 'package:chat_app/wigdets/message_tile.dart';
 import 'package:chat_app/wigdets/search_button.dart';
 import 'package:chat_app/wigdets/text_style.dart';
 import 'package:flutter/material.dart';
@@ -78,12 +79,14 @@ class _ConversationScreenState extends State<ConversationScreen> {
       builder: (context, snapshot) {
         return snapshot.hasData
             ? ListView.builder(
-          itemCount: snapshot.data.documents.length,
-          itemBuilder: (context, index) {
-            return MessageTile(
-                snapshot.data.documents[index].data["message"]);
-          },
-        )
+                itemCount: snapshot.data.documents.length,
+                itemBuilder: (context, index) {
+                  return MessageTile(
+                      snapshot.data.documents[index].data["message"],
+                      snapshot.data.documents[index].data["sendBy"] ==
+                          Constants.myName);
+                },
+              )
             : Container();
       },
     );
@@ -101,18 +104,5 @@ class _ConversationScreenState extends State<ConversationScreen> {
       databaseMethods.sendMessages(widget.chatRoomId, messageMap);
       messageTxt.text = "";
     }
-  }
-}
-
-class MessageTile extends StatelessWidget {
-  final String message;
-
-  MessageTile(this.message);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text(message, style: simpleTextStyle()),
-    );
   }
 }

@@ -45,6 +45,13 @@ class DatabaseMethods {
     });
   }
 
+  getChatRoom(String userName) {
+    return Firestore.instance
+        .collection("ChatRoom")
+        .where("users", arrayContains: userName)
+        .snapshots();
+  }
+
   sendMessages(String chatRoomId, messageMap) {
     Firestore.instance
         .collection("ChatRoom")

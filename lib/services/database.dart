@@ -45,8 +45,8 @@ class DatabaseMethods {
     });
   }
 
-  getChatRoom(String userName) {
-    return Firestore.instance
+  getChatRoom(String userName) async {
+    return await Firestore.instance
         .collection("ChatRoom")
         .where("users", arrayContains: userName)
         .snapshots();
@@ -64,7 +64,7 @@ class DatabaseMethods {
   }
 
   getMessages(String chatRoomId) async {
-    return await Firestore.instance
+    return Firestore.instance
         .collection("ChatRoom")
         .document(chatRoomId)
         .collection("chats")

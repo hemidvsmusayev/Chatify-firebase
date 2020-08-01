@@ -20,7 +20,7 @@ class _ChatRoomState extends State<ChatRoom> {
   @override
   void initState() {
     getUserInfo();
-    databaseMethods.getChatRoom(Constants.myName).then((value) {});
+
     super.initState();
   }
 
@@ -44,6 +44,7 @@ class _ChatRoomState extends State<ChatRoom> {
           )
         ],
       ),
+      body: chatRoomList(),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.search),
         onPressed: () {
@@ -56,6 +57,11 @@ class _ChatRoomState extends State<ChatRoom> {
 
   getUserInfo() async {
     Constants.myName = await HelperFunctions.getUserNameKeyPref();
+    databaseMethods.getChatRoom(Constants.myName).then((value) {
+      setState(() {
+        chatsStream = value;
+      });
+    });
     setState(() {});
   }
 
@@ -63,12 +69,18 @@ class _ChatRoomState extends State<ChatRoom> {
     return StreamBuilder(
       stream: chatsStream,
       builder: (context, snapshot) {
-        return ListView.builder(
-          itemCount: snapshot.data.documents.length,
-          itemBuilder: (context, index) {
-            return ChatsTile(snapshot.data.documents[index].data["chatroomId"]);
-          },
-        );
+        return snapshot.hasData
+            ? ListView.builder(
+                itemCount: snapshot.data.documents.length,
+                itemBuilder: (context, index) {
+                  return ChatsTile(
+                      snapshot.data.documents[index].data["chatroomId"]
+                          .toString()
+                          .replaceAll("_", "")
+                          .replaceAll(Constants.myName, ""),
+                      snapshot.data.documents[index].data["chatroomId"]);
+                })
+            : Container(child: Text("empty"));
       },
     );
   }

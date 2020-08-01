@@ -45,7 +45,7 @@ class DatabaseMethods {
     });
   }
 
-  getMessages(String chatRoomId, messageMap) {
+  sendMessages(String chatRoomId, messageMap) {
     Firestore.instance
         .collection("ChatRoom")
         .document(chatRoomId)
@@ -54,5 +54,14 @@ class DatabaseMethods {
         .catchError((e) {
       print(e.toString());
     });
+  }
+
+  getMessages(String chatRoomId) async {
+    return await Firestore.instance
+        .collection("ChatRoom")
+        .document(chatRoomId)
+        .collection("chats")
+        .orderBy("time", descending: false)
+        .snapshots();
   }
 }

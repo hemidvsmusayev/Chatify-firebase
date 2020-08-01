@@ -64,27 +64,7 @@ class _SignUpState extends State<SignUp> {
                           buildWhiteGradientBtn(context, "Sign up with Google"),
                     ),
                     SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text("Already have account? ",
-                            style: simpleTextStyle()),
-                        GestureDetector(
-                          onTap: () {
-                            widget.toggle();
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 8),
-                            child: Text(
-                              "Sign in now",
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  color: Colors.white),
-                            ),
-                          ),
-                        )
-                      ],
-                    )
+                    buildBottomText()
                   ],
                 ),
               ),
@@ -150,5 +130,27 @@ class _SignUpState extends State<SignUp> {
             context, MaterialPageRoute(builder: (context) => ChatRoom()));
       });
     }
+  }
+
+  buildBottomText() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text("Already have account? ", style: simpleTextStyle()),
+        GestureDetector(
+          onTap: () {
+            widget.toggle();
+          },
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 8),
+            child: Text(
+              "Sign in now",
+              style: TextStyle(
+                  decoration: TextDecoration.underline, color: Colors.white),
+            ),
+          ),
+        )
+      ],
+    );
   }
 }

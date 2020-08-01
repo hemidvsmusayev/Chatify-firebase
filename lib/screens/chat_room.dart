@@ -28,6 +28,7 @@ class _ChatRoomState extends State<ChatRoom> {
           GestureDetector(
             onTap: () {
               authMetods.signOut();
+              HelperFunctions.saveUserLoggedKeyPref(false);
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => Authenticate()));
             },
@@ -50,5 +51,6 @@ class _ChatRoomState extends State<ChatRoom> {
 
   getUserInfo() async {
     Constants.myName = await HelperFunctions.getUserNameKeyPref();
+    setState(() {});
   }
 }

@@ -44,4 +44,15 @@ class DatabaseMethods {
       print(e.toString());
     });
   }
+
+  getMessages(String chatRoomId, messageMap) {
+    Firestore.instance
+        .collection("ChatRoom")
+        .document(chatRoomId)
+        .collection("chats")
+        .add(messageMap)
+        .catchError((e) {
+      print(e.toString());
+    });
+  }
 }

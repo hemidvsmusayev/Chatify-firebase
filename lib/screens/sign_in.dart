@@ -66,28 +66,8 @@ class _SignInState extends State<SignIn> {
                           buildWhiteGradientBtn(context, "Sign in with Google"),
                     ),
                     SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text("Don't have an account? ",
-                            style: simpleTextStyle()),
-                        GestureDetector(
-                          onTap: () {
-                            widget.toggle();
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(vertical: 8),
-                            child: Text(
-                              "Register now",
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  color: Colors.white),
-                            ),
-                          ),
-                  )
-                ],
-              )
-            ],
+                    buildBottomText()
+                  ],
           ),
         ),
       ),
@@ -152,5 +132,29 @@ class _SignInState extends State<SignIn> {
         }
       });
     }
+  }
+
+  buildBottomText() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text("Don't have an account? ",
+            style: simpleTextStyle()),
+        GestureDetector(
+          onTap: () {
+            widget.toggle();
+          },
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 8),
+            child: Text(
+              "Register now",
+              style: TextStyle(
+                  decoration: TextDecoration.underline,
+                  color: Colors.white),
+            ),
+          ),
+        )
+      ],
+    );
   }
 }

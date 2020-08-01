@@ -40,7 +40,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     decoration: buildInputDecoration("Search users..."),
                   )),
                   GestureDetector(
-                      onTap: initiateSearch, child: buildSearchBtn()),
+                      onTap: initiateSearch,
+                      child: buildSearchBtn("assets/images/search_white.png")),
                 ],
               ),
             ),
@@ -76,7 +77,7 @@ class _SearchScreenState extends State<SearchScreen> {
           return userTile(searchSnapshot.documents[index].data["name"],
               searchSnapshot.documents[index].data["email"]);
         })
-        : CircularProgressIndicator();
+        : Text("Empty here");
   }
 
   Widget userTile(String userName, String userEmail) {
@@ -119,7 +120,8 @@ class _SearchScreenState extends State<SearchScreen> {
       };
       databaseMethods.createChatRoom(chatRoomId, chatRoomMap);
       Navigator.push(context,
-          MaterialPageRoute(builder: (context) => ConversationScreen()));
+          MaterialPageRoute(
+              builder: (context) => ConversationScreen(chatRoomId)));
     } else {
       print("you can not send message to yourself");
     }

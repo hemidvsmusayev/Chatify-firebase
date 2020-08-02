@@ -1,6 +1,7 @@
 import 'package:chat_app/helper/authenticate.dart';
 import 'package:chat_app/helper/helper_functions.dart';
 import 'package:chat_app/screens/chat_room.dart';
+import 'package:chat_app/shared/app_colors.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -34,8 +35,9 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Color(0xff145c9e),
-        scaffoldBackgroundColor: Color(0xff1f1f1f),
+        primaryColor: AppColors.kScaffoldBackgroundColor,
+        fontFamily: "FiraSans",
+        scaffoldBackgroundColor: AppColors.kScaffoldBackgroundColor,
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),

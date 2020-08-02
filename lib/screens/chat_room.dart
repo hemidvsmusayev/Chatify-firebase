@@ -4,7 +4,9 @@ import 'package:chat_app/helper/helper_functions.dart';
 import 'package:chat_app/screens/search.dart';
 import 'package:chat_app/services/authentication.dart';
 import 'package:chat_app/services/database.dart';
+import 'package:chat_app/shared/app_colors.dart';
 import 'package:chat_app/widgets/chats_tile.dart';
+import 'package:chat_app/widgets/text_style.dart';
 import 'package:flutter/material.dart';
 
 class ChatRoom extends StatefulWidget {
@@ -28,7 +30,7 @@ class _ChatRoomState extends State<ChatRoom> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chatify"),
+        title: Text("Chatify", style: TextStyle(fontSize: 28)),
         actions: <Widget>[
           GestureDetector(
             onTap: () {
@@ -39,7 +41,8 @@ class _ChatRoomState extends State<ChatRoom> {
             },
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Icon(Icons.exit_to_app),
+              child: Icon(Icons.exit_to_app,
+                  color: AppColors.inputLineEnabledColor),
             ),
           )
         ],

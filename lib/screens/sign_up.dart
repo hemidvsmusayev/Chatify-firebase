@@ -35,8 +35,8 @@ class _SignUpState extends State<SignUp> {
           ? buildIndicator()
           : SingleChildScrollView(
               child: Container(
-                height: MediaQuery.of(context).size.height - 40,
-                padding: EdgeInsets.all(24),
+                height: MediaQuery.of(context).size.height - 60,
+                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 32),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
@@ -48,9 +48,9 @@ class _SignUpState extends State<SignUp> {
                     SizedBox(height: 12),
                     Container(
                       padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       alignment: Alignment.centerRight,
-                      child: Text("Forgot password", style: simpleTextStyle()),
+                      child: Text("Forgot password?", style: simpleTextStyle()),
                     ),
                     SizedBox(height: 8),
                     GestureDetector(
@@ -58,13 +58,7 @@ class _SignUpState extends State<SignUp> {
                           signUp();
                         },
                         child: buildGradientBtn(context, "Sign Up")),
-                    SizedBox(height: 12),
-                    GestureDetector(
-                      onTap: () {},
-                      child:
-                          buildWhiteGradientBtn(context, "Sign up with Google"),
-                    ),
-                    SizedBox(height: 16),
+                    SizedBox(height: 18),
                     buildBottomText()
                   ],
                 ),
@@ -84,7 +78,7 @@ class _SignUpState extends State<SignUp> {
                 return validateName(val);
               },
               style: simpleTextStyle(),
-              decoration: buildInputDecoration("Username")),
+              decoration: buildInputDecoration("Username", Icon(Icons.person))),
           SizedBox(height: 12),
           TextFormField(
               controller: txtEmail,
@@ -92,7 +86,7 @@ class _SignUpState extends State<SignUp> {
                 return validateEmail(val);
               },
               style: simpleTextStyle(),
-              decoration: buildInputDecoration("Email")),
+              decoration: buildInputDecoration("Email", Icon(Icons.mail))),
           SizedBox(height: 12),
           TextFormField(
               controller: txtPassword,
@@ -101,7 +95,7 @@ class _SignUpState extends State<SignUp> {
                 return validatePassword(val);
               },
               style: simpleTextStyle(),
-              decoration: buildInputDecoration("Password")),
+              decoration: buildInputDecoration("Password", Icon(Icons.lock))),
         ],
       ),
     );
@@ -146,8 +140,7 @@ class _SignUpState extends State<SignUp> {
             padding: EdgeInsets.symmetric(vertical: 8),
             child: Text(
               "Sign in now",
-              style: TextStyle(
-                  decoration: TextDecoration.underline, color: Colors.white),
+              style: blueTextStyle(),
             ),
           ),
         )

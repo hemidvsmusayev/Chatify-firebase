@@ -37,7 +37,8 @@ class _SearchScreenState extends State<SearchScreen> {
                   Expanded(
                       child: TextField(
                     controller: searchTxt,
-                    decoration: buildInputDecoration("Search users..."),
+                    decoration: buildInputDecoration(
+                        "Search users...", Icon(Icons.add)),
                   )),
                   GestureDetector(
                       onTap: initiateSearch,

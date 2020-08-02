@@ -36,10 +36,13 @@ class _ConversationScreenState extends State<ConversationScreen> {
       appBar: AppBar(
         title: Text("Chatify"),
       ),
-      body: Container(
-        child: Stack(
-          children: [chatMessageList(), buildMessageInput()],
-        ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: chatMessageList(),
+          ),
+          buildMessageInput()
+        ],
       ),
     );
   }

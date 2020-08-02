@@ -3,14 +3,15 @@ import 'package:chat_app/helper/validators.dart';
 import 'package:chat_app/screens/chat_room.dart';
 import 'package:chat_app/services/authentication.dart';
 import 'package:chat_app/services/database.dart';
-import 'package:chat_app/wigdets/gradient_button.dart';
-import 'package:chat_app/wigdets/input_decoration.dart';
-import 'package:chat_app/wigdets/progress_indicator.dart';
-import 'package:chat_app/wigdets/text_style.dart';
+import 'package:chat_app/widgets/gradient_button.dart';
+import 'package:chat_app/widgets/input_decoration.dart';
+import 'package:chat_app/widgets/progress_indicator.dart';
+import 'package:chat_app/widgets/text_style.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
   final Function toggle;
+
   SignUp(this.toggle);
 
   @override

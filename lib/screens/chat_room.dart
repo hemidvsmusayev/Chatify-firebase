@@ -4,7 +4,7 @@ import 'package:chat_app/helper/helper_functions.dart';
 import 'package:chat_app/screens/search.dart';
 import 'package:chat_app/services/authentication.dart';
 import 'package:chat_app/services/database.dart';
-import 'package:chat_app/wigdets/chats_tile.dart';
+import 'package:chat_app/widgets/chats_tile.dart';
 import 'package:flutter/material.dart';
 
 class ChatRoom extends StatefulWidget {

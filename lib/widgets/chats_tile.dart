@@ -1,5 +1,5 @@
 import 'package:chat_app/screens/conversation.dart';
-import 'package:chat_app/wigdets/text_style.dart';
+import 'package:chat_app/widgets/text_style.dart';
 import 'package:flutter/material.dart';
 
 class ChatsTile extends StatelessWidget {

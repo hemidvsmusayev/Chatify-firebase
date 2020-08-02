@@ -1,9 +1,9 @@
 import 'package:chat_app/helper/contstants.dart';
 import 'package:chat_app/screens/conversation.dart';
 import 'package:chat_app/services/database.dart';
-import 'package:chat_app/wigdets/input_decoration.dart';
-import 'package:chat_app/wigdets/search_button.dart';
-import 'package:chat_app/wigdets/text_style.dart';
+import 'package:chat_app/widgets/input_decoration.dart';
+import 'package:chat_app/widgets/search_button.dart';
+import 'package:chat_app/widgets/text_style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

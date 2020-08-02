@@ -1,8 +1,8 @@
 import 'package:chat_app/helper/contstants.dart';
 import 'package:chat_app/services/database.dart';
-import 'package:chat_app/wigdets/message_tile.dart';
-import 'package:chat_app/wigdets/search_button.dart';
-import 'package:chat_app/wigdets/text_style.dart';
+import 'package:chat_app/widgets/message_tile.dart';
+import 'package:chat_app/widgets/search_button.dart';
+import 'package:chat_app/widgets/text_style.dart';
 import 'package:flutter/material.dart';
 
 class ConversationScreen extends StatefulWidget {
@@ -18,13 +18,13 @@ class _ConversationScreenState extends State<ConversationScreen> {
   TextEditingController messageTxt = TextEditingController();
   DatabaseMethods databaseMethods = DatabaseMethods();
 
-  Stream messagesStrem;
+  Stream messagesStream;
 
   @override
   void initState() {
     databaseMethods.getMessages(widget.chatRoomId).then((value) {
       setState(() {
-        messagesStrem = value;
+        messagesStream = value;
       });
     });
     super.initState();
@@ -75,7 +75,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
 
   Widget chatMessageList() {
     return StreamBuilder(
-      stream: messagesStrem,
+      stream: messagesStream,
       builder: (context, snapshot) {
         return snapshot.hasData
             ? ListView.builder(

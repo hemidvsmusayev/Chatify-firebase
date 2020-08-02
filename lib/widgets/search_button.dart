@@ -1,11 +1,14 @@
+import 'package:chat_app/shared/app_colors.dart';
 import 'package:flutter/material.dart';
 
 Container buildSearchBtn(String fileDirectory) {
   return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
-          gradient:
-              LinearGradient(colors: [Color(0x36FFFFFF), Color(0x0FFFFFFF)]),
+          gradient: LinearGradient(colors: [
+            AppColors.gradientButtonFirstColor,
+            AppColors.gradientButtonSecondColor
+          ]),
           borderRadius: BorderRadius.circular(40)),
       child: Image.asset(
         fileDirectory,

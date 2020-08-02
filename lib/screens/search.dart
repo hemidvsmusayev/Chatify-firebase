@@ -1,8 +1,8 @@
 import 'package:chat_app/helper/contstants.dart';
 import 'package:chat_app/screens/conversation.dart';
 import 'package:chat_app/services/database.dart';
-import 'package:chat_app/widgets/input_decoration.dart';
 import 'package:chat_app/widgets/search_button.dart';
+import 'package:chat_app/widgets/search_input_decoration.dart';
 import 'package:chat_app/widgets/text_style.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -36,10 +36,9 @@ class _SearchScreenState extends State<SearchScreen> {
                 children: <Widget>[
                   Expanded(
                       child: TextField(
-                    controller: searchTxt,
-                    decoration: buildInputDecoration(
-                        "Search users...", Icon(Icons.add)),
-                  )),
+                          controller: searchTxt,
+                          decoration:
+                              buildSearchInputDecoration("Search users..."))),
                   GestureDetector(
                       onTap: initiateSearch,
                       child: buildSearchBtn("assets/images/search_white.png")),
@@ -120,7 +119,8 @@ class _SearchScreenState extends State<SearchScreen> {
         "chatroomId": chatRoomId
       };
       databaseMethods.createChatRoom(chatRoomId, chatRoomMap);
-      Navigator.push(context,
+      Navigator.push(
+          context,
           MaterialPageRoute(
               builder: (context) => ConversationScreen(chatRoomId)));
     } else {

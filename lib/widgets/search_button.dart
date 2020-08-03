@@ -1,4 +1,3 @@
-import 'package:chat_app/shared/app_colors.dart';
 import 'package:flutter/material.dart';
 
 Container buildSearchBtn(String fileDirectory) {

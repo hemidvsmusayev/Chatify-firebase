@@ -1,4 +1,3 @@
-import 'package:chat_app/helper/authenticate.dart';
 import 'package:chat_app/helper/contstants.dart';
 import 'package:chat_app/helper/helper_functions.dart';
 import 'package:chat_app/screens/search.dart';

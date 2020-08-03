@@ -1,6 +1,7 @@
 import 'package:chat_app/helper/contstants.dart';
 import 'package:chat_app/screens/conversation.dart';
 import 'package:chat_app/services/database.dart';
+import 'package:chat_app/shared/app_colors.dart';
 import 'package:chat_app/widgets/search_button.dart';
 import 'package:chat_app/widgets/search_input_decoration.dart';
 import 'package:chat_app/widgets/text_style.dart';
@@ -24,29 +25,9 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Chatify"),
-      ),
       body: Container(
         child: Column(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                      child: TextField(
-                          controller: searchTxt,
-                          decoration:
-                              buildSearchInputDecoration("Search users..."))),
-                  GestureDetector(
-                      onTap: initiateSearch,
-                      child: buildSearchBtn("assets/images/search_white.png")),
-                ],
-              ),
-            ),
-            searchList()
-          ],
+          children: <Widget>[buildTopPanel(), searchList()],
         ),
       ),
     );
@@ -71,13 +52,13 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget searchList() {
     return haveUserSearched
         ? ListView.builder(
-        shrinkWrap: true,
-        itemCount: searchSnapshot.documents.length,
-        itemBuilder: (context, index) {
-          return userTile(searchSnapshot.documents[index].data["name"],
-              searchSnapshot.documents[index].data["email"]);
-        })
-        : Text("Empty here");
+            shrinkWrap: true,
+            itemCount: searchSnapshot.documents.length,
+            itemBuilder: (context, index) {
+              return userTile(searchSnapshot.documents[index].data["name"],
+                  searchSnapshot.documents[index].data["email"]);
+            })
+        : Expanded(child: Center(child: Text("Nothing to show")));
   }
 
   Widget userTile(String userName, String userEmail) {
@@ -101,7 +82,7 @@ class _SearchScreenState extends State<SearchScreen> {
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               decoration: BoxDecoration(
                   color: Colors.blue, borderRadius: BorderRadius.circular(24)),
-              child: Text("Message", style: simpleTextStyle()),
+              child: Text("Message", style: TextStyle(color: Colors.white)),
             ),
           )
         ],
@@ -134,5 +115,53 @@ class _SearchScreenState extends State<SearchScreen> {
     } else {
       return "$a\_$b";
     }
+  }
+
+  buildTopPanel() {
+    return Container(
+      width: MediaQuery
+          .of(context)
+          .size
+          .width,
+      padding: EdgeInsets.only(
+          top: MediaQuery
+              .of(context)
+              .padding
+              .top + 60,
+          bottom: 30,
+          left: 30,
+          right: 30),
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                AppColors.gradientButtonFirstColor,
+                AppColors.gradientButtonSecondColor
+              ]),
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(30),
+              bottomRight: Radius.circular(30))),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text("Search user", style: appBarTextStyle()),
+          SizedBox(height: 12),
+          Row(
+            children: <Widget>[
+              Expanded(
+                  child: TextField(
+                      controller: searchTxt,
+                      style:
+                      TextStyle(color: AppColors.kScaffoldBackgroundColor),
+                      decoration: buildSearchInputDecoration("Type here..."))),
+              GestureDetector(
+                  onTap: initiateSearch,
+                  child: buildSearchBtn("assets/images/search_white.png")),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

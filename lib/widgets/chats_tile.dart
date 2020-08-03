@@ -24,8 +24,8 @@ class ChatsTile extends StatelessWidget {
           children: <Widget>[
             Container(
                 alignment: Alignment.center,
-                height: 40,
-                width: 40,
+                height: 50,
+                width: 50,
                 decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(40)),

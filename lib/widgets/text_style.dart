@@ -6,8 +6,7 @@ TextStyle simpleTextStyle() {
 }
 
 TextStyle mediumTextStyle() {
-  return TextStyle(
-      color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold);
+  return TextStyle(color: Colors.white, fontSize: 18);
 }
 
 TextStyle largeTextStyle() {
@@ -19,4 +18,9 @@ TextStyle largeTextStyle() {
 
 TextStyle blueTextStyle() {
   return TextStyle(color: AppColors.gradientButtonFirstColor, fontSize: 17);
+}
+
+TextStyle appBarTextStyle() {
+  return TextStyle(
+      color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold);
 }

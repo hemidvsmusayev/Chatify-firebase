@@ -6,6 +6,7 @@ import 'package:chat_app/services/authentication.dart';
 import 'package:chat_app/services/database.dart';
 import 'package:chat_app/shared/app_colors.dart';
 import 'package:chat_app/widgets/chats_tile.dart';
+import 'package:chat_app/widgets/text_style.dart';
 import 'package:flutter/material.dart';
 
 class ChatRoom extends StatefulWidget {
@@ -14,7 +15,7 @@ class ChatRoom extends StatefulWidget {
 }
 
 class _ChatRoomState extends State<ChatRoom> {
-  AuthMethods authMetods = new AuthMethods();
+  AuthMethods authMethods = new AuthMethods();
   DatabaseMethods databaseMethods = DatabaseMethods();
   Stream chatsStream;
 
@@ -28,12 +29,12 @@ class _ChatRoomState extends State<ChatRoom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         title: Text("Chatify", style: TextStyle(fontSize: 28)),
         actions: <Widget>[
           GestureDetector(
             onTap: () {
-              authMetods.signOut();
+              authMethods.signOut();
               HelperFunctions.saveUserLoggedKeyPref(false);
               Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (context) => Authenticate()));
@@ -46,7 +47,14 @@ class _ChatRoomState extends State<ChatRoom> {
           )
         ],
       ),
-      body: chatRoomList(),
+
+       */
+      body: Column(
+        children: <Widget>[
+          buildTopPanel(),
+          chatRoomList(),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.search),
         onPressed: () {
@@ -74,6 +82,7 @@ class _ChatRoomState extends State<ChatRoom> {
         return snapshot.hasData
             ? ListView.builder(
                 itemCount: snapshot.data.documents.length,
+                shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return ChatsTile(
                       snapshot.data.documents[index].data["chatroomId"]
@@ -82,8 +91,37 @@ class _ChatRoomState extends State<ChatRoom> {
                           .replaceAll(Constants.myName, ""),
                       snapshot.data.documents[index].data["chatroomId"]);
                 })
-            : Container(child: Text("empty"));
+            : Expanded(child: Center(child: Text("Nothing to show")));
       },
+    );
+  }
+
+  buildTopPanel() {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).padding.top + 40,
+          bottom: 30,
+          left: 30,
+          right: 30),
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                AppColors.gradientButtonFirstColor,
+                AppColors.gradientButtonSecondColor
+              ]),
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(30),
+              bottomRight: Radius.circular(30))),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text("Chatify", style: appBarTextStyle()),
+          Text(Constants.myName, style: mediumTextStyle()),
+        ],
+      ),
     );
   }
 }

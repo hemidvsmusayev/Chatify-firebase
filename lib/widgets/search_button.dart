@@ -5,11 +5,7 @@ Container buildSearchBtn(String fileDirectory) {
   return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-            AppColors.gradientButtonFirstColor,
-            AppColors.gradientButtonSecondColor
-          ]),
-          borderRadius: BorderRadius.circular(40)),
+          color: Colors.white38, borderRadius: BorderRadius.circular(40)),
       child: Image.asset(
         fileDirectory,
         height: 20,

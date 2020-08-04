@@ -2,7 +2,6 @@ import 'package:chat_app/helper/contstants.dart';
 import 'package:chat_app/services/database.dart';
 import 'package:chat_app/widgets/message_input_decoration.dart';
 import 'package:chat_app/widgets/message_tile.dart';
-import 'package:chat_app/widgets/search_button.dart';
 import 'package:chat_app/widgets/send_button.dart';
 import 'package:chat_app/widgets/text_style.dart';
 import 'package:flutter/material.dart';

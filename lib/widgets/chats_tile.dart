@@ -18,7 +18,7 @@ class ChatsTile extends StatelessWidget {
                 builder: (context) => ConversationScreen(chatRoom)));
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         child: Row(
           children: <Widget>[
             Container(

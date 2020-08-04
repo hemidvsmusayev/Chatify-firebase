@@ -18,4 +18,6 @@ class AppColors {
   static const messageRightSecondColor = Color.fromRGBO(65, 164, 254, 1);
   static const messageLeftFirstColor = Color.fromRGBO(240, 240, 240, 1);
   static const messageLeftSecondColor = Color.fromRGBO(235, 235, 235, 1);
+  static const sendButtonFirstColor = Color.fromRGBO(5, 131, 246, 1);
+  static const sendButtonSecondColor = Colors.lightBlueAccent;
 }

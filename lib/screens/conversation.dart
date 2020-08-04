@@ -1,7 +1,9 @@
 import 'package:chat_app/helper/contstants.dart';
 import 'package:chat_app/services/database.dart';
+import 'package:chat_app/widgets/message_input_decoration.dart';
 import 'package:chat_app/widgets/message_tile.dart';
 import 'package:chat_app/widgets/search_button.dart';
+import 'package:chat_app/widgets/send_button.dart';
 import 'package:chat_app/widgets/text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +54,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
       alignment: Alignment.bottomCenter,
       width: MediaQuery.of(context).size.width,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
         color: Color(0x54FFFFFF),
         child: Row(
           children: [
@@ -60,16 +62,13 @@ class _ConversationScreenState extends State<ConversationScreen> {
                 child: TextField(
                     controller: messageTxt,
                     style: simpleTextStyle(),
-                    decoration: InputDecoration(
-                        hintText: "Type here...",
-                        hintStyle: TextStyle(color: Colors.white, fontSize: 16),
-                        border: InputBorder.none))),
+                    decoration: buildMessageInputDecoration("Type here..."))),
             SizedBox(width: 16),
             GestureDetector(
                 onTap: () {
                   sendMessage();
                 },
-                child: buildSearchBtn("assets/images/send.png"))
+                child: buildSendBtn("assets/images/send.png"))
           ],
         ),
       ),
@@ -100,9 +99,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
       Map<String, dynamic> messageMap = {
         "message": messageTxt.text,
         "sendBy": Constants.myName,
-        "time": DateTime
-            .now()
-            .millisecondsSinceEpoch
+        "time": DateTime.now().millisecondsSinceEpoch
       };
       databaseMethods.sendMessages(widget.chatRoomId, messageMap);
       messageTxt.text = "";

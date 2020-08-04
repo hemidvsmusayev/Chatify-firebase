@@ -13,10 +13,8 @@ InputDecoration buildInputDecoration(String hintTxt, Icon iconData) {
         borderSide:
             BorderSide(width: 1.5, color: AppColors.inputLineEnabledColor)),
     errorBorder: UnderlineInputBorder(
-        borderSide:
-            BorderSide(width: 1.5, color: AppColors.inputLineErrorColor)),
+        borderSide: BorderSide(width: 1.5, color: Colors.red)),
     focusedErrorBorder: UnderlineInputBorder(
-        borderSide:
-            BorderSide(width: 1.5, color: AppColors.inputLineErrorColor)),
+        borderSide: BorderSide(width: 1.5, color: Colors.red)),
   );
 }

@@ -18,7 +18,6 @@ class ChatsTile extends StatelessWidget {
                 builder: (context) => ConversationScreen(chatRoom)));
       },
       child: Container(
-        color: Colors.black26,
         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         child: Row(
           children: <Widget>[
@@ -29,7 +28,8 @@ class ChatsTile extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(40)),
-                child: Text("${userName.substring(0, 1).toUpperCase()}")),
+                child: Text("${userName.substring(0, 1).toUpperCase()}",
+                    style: mediumTextStyle())),
             SizedBox(width: 8),
             Text(userName, style: simpleTextStyle())
           ],

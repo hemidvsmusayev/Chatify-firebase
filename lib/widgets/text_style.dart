@@ -24,3 +24,7 @@ TextStyle appBarTextStyle() {
   return TextStyle(
       color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold);
 }
+
+TextStyle appBarSecondTextStyle() {
+  return TextStyle(color: Colors.white70, fontSize: 16);
+}

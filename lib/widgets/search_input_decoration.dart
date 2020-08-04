@@ -12,10 +12,8 @@ InputDecoration buildSearchInputDecoration(String hintTxt) {
         borderSide:
             BorderSide(width: 1.5, color: AppColors.kScaffoldBackgroundColor)),
     errorBorder: UnderlineInputBorder(
-        borderSide:
-            BorderSide(width: 1.5, color: AppColors.inputLineErrorColor)),
+        borderSide: BorderSide(width: 1.5, color: Colors.red)),
     focusedErrorBorder: UnderlineInputBorder(
-        borderSide:
-            BorderSide(width: 1.5, color: AppColors.inputLineErrorColor)),
+        borderSide: BorderSide(width: 1.5, color: Colors.red)),
   );
 }

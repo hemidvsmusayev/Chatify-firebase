@@ -1,3 +1,4 @@
+import 'package:chat_app/shared/app_colors.dart';
 import 'package:chat_app/widgets/text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -11,27 +12,34 @@ class MessageTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-          left: isSendByMe ? 0 : 16, right: isSendByMe ? 16 : 0),
-      margin: EdgeInsets.symmetric(vertical: 8),
+          left: isSendByMe ? 62 : 8, right: isSendByMe ? 8 : 62),
+      margin: EdgeInsets.symmetric(vertical: 2),
       width: MediaQuery.of(context).size.width,
       alignment: isSendByMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 colors: isSendByMe
-                    ? [Color(0xff007ef4), Color(0xff2a75bc)]
-                    : [Color(0x1affffff), Color(0x1affffff)]),
+                    ? [
+                        AppColors.messageRightFirstColor,
+                        AppColors.messageRightSecondColor
+                      ]
+                    : [
+                        AppColors.messageLeftFirstColor,
+                        AppColors.messageLeftSecondColor
+                      ]),
             borderRadius: isSendByMe
                 ? BorderRadius.only(
-                    topLeft: Radius.circular(24),
-                    topRight: Radius.circular(24),
-                    bottomLeft: Radius.circular(24))
+                    topLeft: Radius.circular(18),
+                    topRight: Radius.circular(18),
+                    bottomLeft: Radius.circular(18))
                 : BorderRadius.only(
-                    topLeft: Radius.circular(24),
-                    topRight: Radius.circular(24),
-                    bottomRight: Radius.circular(24))),
-        child: Text(message, style: simpleTextStyle()),
+                    topLeft: Radius.circular(18),
+                    topRight: Radius.circular(18),
+                    bottomRight: Radius.circular(18))),
+        child: Text(message,
+            style: isSendByMe ? mediumTextStyle() : simpleTextStyle()),
       ),
     );
   }

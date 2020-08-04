@@ -2,11 +2,11 @@ import 'package:chat_app/shared/app_colors.dart';
 import 'package:flutter/material.dart';
 
 TextStyle simpleTextStyle() {
-  return TextStyle(color: AppColors.inputLineHintColor, fontSize: 17);
+  return TextStyle(color: AppColors.inputLineHintColor, fontSize: 16);
 }
 
 TextStyle mediumTextStyle() {
-  return TextStyle(color: Colors.white, fontSize: 18);
+  return TextStyle(color: Colors.white, fontSize: 16);
 }
 
 TextStyle largeTextStyle() {

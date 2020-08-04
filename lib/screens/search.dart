@@ -133,8 +133,8 @@ class _SearchScreenState extends State<SearchScreen> {
           right: 30),
       decoration: BoxDecoration(
           gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
               colors: [
                 AppColors.gradientButtonFirstColor,
                 AppColors.gradientButtonSecondColor

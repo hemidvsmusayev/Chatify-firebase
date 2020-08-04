@@ -32,8 +32,8 @@ class _ChatRoomState extends State<ChatRoom> {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
+              begin: Alignment.topRight,
+              end: Alignment.topLeft,
               colors: [
                 AppColors.gradientButtonFirstColor,
                 AppColors.gradientButtonSecondColor
@@ -72,25 +72,25 @@ class _ChatRoomState extends State<ChatRoom> {
       builder: (context, snapshot) {
         return snapshot.hasData
             ? Expanded(
-          child: Container(
-            child: ListView.builder(
-                itemCount: snapshot.data.documents.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return ChatsTile(
-                      snapshot.data.documents[index].data["chatroomId"]
-                          .toString()
-                          .replaceAll("_", "")
-                          .replaceAll(Constants.myName, ""),
-                      snapshot.data.documents[index].data["chatroomId"]);
-                }),
-            decoration: BoxDecoration(
-                color: AppColors.kScaffoldBackgroundColor,
-                borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(30),
-                    topLeft: Radius.circular(30))),
-          ),
-        )
+                child: Container(
+                  child: ListView.builder(
+                      itemCount: snapshot.data.documents.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return ChatsTile(
+                            snapshot.data.documents[index].data["chatroomId"]
+                                .toString()
+                                .replaceAll("_", "")
+                                .replaceAll(Constants.myName, ""),
+                            snapshot.data.documents[index].data["chatroomId"]);
+                      }),
+                  decoration: BoxDecoration(
+                      color: AppColors.kScaffoldBackgroundColor,
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(40),
+                          topLeft: Radius.circular(40))),
+                ),
+              )
             : Expanded(child: Center(child: Text("Nothing to show")));
       },
     );
@@ -110,7 +110,7 @@ class _ChatRoomState extends State<ChatRoom> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text("Chatify", style: appBarTextStyle()),
-                //Text(Constants.myName, style: appBarSecondTextStyle())
+                Text(Constants.myName, style: appBarSecondTextStyle())
               ]),
           Spacer(),
           IconButton(

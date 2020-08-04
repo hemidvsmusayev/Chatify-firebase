@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: AppColors.kScaffoldBackgroundColor,
+        primaryColor: AppColors.gradientButtonFirstColor,
         fontFamily: "FiraSans",
         scaffoldBackgroundColor: AppColors.kScaffoldBackgroundColor,
         primarySwatch: Colors.blue,

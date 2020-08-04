@@ -29,11 +29,22 @@ class _ChatRoomState extends State<ChatRoom> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          buildTopPanel(),
-          chatRoomList(),
-        ],
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                AppColors.gradientButtonFirstColor,
+                AppColors.gradientButtonSecondColor
+              ]),
+        ),
+        child: Column(
+          children: <Widget>[
+            buildTopPanel(),
+            chatRoomList(),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.search),
@@ -60,17 +71,26 @@ class _ChatRoomState extends State<ChatRoom> {
       stream: chatsStream,
       builder: (context, snapshot) {
         return snapshot.hasData
-            ? ListView.builder(
-            itemCount: snapshot.data.documents.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return ChatsTile(
-                  snapshot.data.documents[index].data["chatroomId"]
-                      .toString()
-                      .replaceAll("_", "")
-                      .replaceAll(Constants.myName, ""),
-                  snapshot.data.documents[index].data["chatroomId"]);
-            })
+            ? Expanded(
+          child: Container(
+            child: ListView.builder(
+                itemCount: snapshot.data.documents.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return ChatsTile(
+                      snapshot.data.documents[index].data["chatroomId"]
+                          .toString()
+                          .replaceAll("_", "")
+                          .replaceAll(Constants.myName, ""),
+                      snapshot.data.documents[index].data["chatroomId"]);
+                }),
+            decoration: BoxDecoration(
+                color: AppColors.kScaffoldBackgroundColor,
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(30),
+                    topLeft: Radius.circular(30))),
+          ),
+        )
             : Expanded(child: Center(child: Text("Nothing to show")));
       },
     );
@@ -84,17 +104,6 @@ class _ChatRoomState extends State<ChatRoom> {
           bottom: 30,
           left: 30,
           right: 30),
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                AppColors.gradientButtonFirstColor,
-                AppColors.gradientButtonSecondColor
-              ]),
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(30),
-              bottomRight: Radius.circular(30))),
       child: Row(
         children: <Widget>[
           Column(

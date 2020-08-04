@@ -110,7 +110,7 @@ class _ChatRoomState extends State<ChatRoom> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text("Chatify", style: appBarTextStyle()),
-                Text(Constants.myName, style: appBarSecondTextStyle())
+                //Text(Constants.myName, style: appBarSecondTextStyle())
               ]),
           Spacer(),
           IconButton(

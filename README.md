@@ -1,6 +1,13 @@
-# Still in develop!
+# Chatify
 
-A new Flutter application.
+Clean code with beautiful UI chat app using firebase database.
+
+✔ Current ver. : 1.2.0 -stable
+✔ Last updated : 06.08.2020
+✔ Beautiful UI
+✔ Clean code
+✔ Firebase auth & database
+
 
 ## Getting Started
 

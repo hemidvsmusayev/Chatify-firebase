@@ -1,5 +1,7 @@
 import 'package:chat_app/helper/contstants.dart';
+import 'package:chat_app/screens/chat_room.dart';
 import 'package:chat_app/services/database.dart';
+import 'package:chat_app/shared/app_colors.dart';
 import 'package:chat_app/widgets/message_input_decoration.dart';
 import 'package:chat_app/widgets/message_tile.dart';
 import 'package:chat_app/widgets/send_button.dart';
@@ -34,11 +36,9 @@ class _ConversationScreenState extends State<ConversationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Chatify"),
-      ),
       body: Column(
         children: <Widget>[
+          buildTopPanel(),
           Expanded(
             child: chatMessageList(),
           ),
@@ -103,5 +103,45 @@ class _ConversationScreenState extends State<ConversationScreen> {
       databaseMethods.sendMessages(widget.chatRoomId, messageMap);
       messageTxt.text = "";
     }
+  }
+
+  buildTopPanel() {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).padding.top + 8,
+          bottom: 8,
+          left: 6,
+          right: 8),
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                AppColors.gradientButtonFirstColor,
+                AppColors.gradientButtonSecondColor
+              ]),
+          borderRadius: BorderRadius.only(bottomRight: Radius.circular(30))),
+      child: Row(
+        children: [
+          IconButton(
+              onPressed: () {
+                Navigator.pop(context,
+                    MaterialPageRoute(builder: (context) => ChatRoom()));
+              },
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.white,
+                size: 24,
+              )),
+          Text(
+              widget.chatRoomId
+                  .toString()
+                  .replaceAll("_", "")
+                  .replaceAll(Constants.myName, ""),
+              style: appBarNameStyle()),
+        ],
+      ),
+    );
   }
 }

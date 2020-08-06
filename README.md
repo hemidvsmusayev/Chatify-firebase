@@ -9,7 +9,8 @@ Clean code with beautiful UI chat app using firebase database.
 ✔ Firebase auth & database
 
 # Screens
-
+<img src="https://github.com/hemidvsmusayev/Chatify-firebase/blob/master/assets/screens/1.png?raw=true" width="300"> <img src="https://github.com/hemidvsmusayev/Chatify-firebase/blob/master/assets/screens/2.png?raw=true" width="300"> <img src="https://github.com/hemidvsmusayev/Chatify-firebase/blob/master/assets/screens/3.png?raw=true" width="300">
+<img src="https://github.com/hemidvsmusayev/Chatify-firebase/blob/master/assets/screens/4.png?raw=true" width="300"> <img src="https://github.com/hemidvsmusayev/Chatify-firebase/blob/master/assets/screens/5.png?raw=true" width="300"> <img src="https://github.com/hemidvsmusayev/Chatify-firebase/blob/master/assets/screens/6.png" width="300"> 
 
 
 ## Getting Started

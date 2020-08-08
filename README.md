@@ -8,6 +8,8 @@ Clean code with beautiful UI chat app using firebase database.
 ✔ Clean code
 ✔ Firebase auth & database
 
+❗ I removed my .json from android/app folder to use app add your own
+
 # Screens
 <img src="https://github.com/hemidvsmusayev/Chatify-firebase/blob/master/assets/screens/1.png?raw=true" width="300"> <img src="https://github.com/hemidvsmusayev/Chatify-firebase/blob/master/assets/screens/2.png?raw=true" width="300"> <img src="https://github.com/hemidvsmusayev/Chatify-firebase/blob/master/assets/screens/3.png?raw=true" width="300">
 <img src="https://github.com/hemidvsmusayev/Chatify-firebase/blob/master/assets/screens/4.png?raw=true" width="300"> <img src="https://github.com/hemidvsmusayev/Chatify-firebase/blob/master/assets/screens/5.png?raw=true" width="300"> <img src="https://github.com/hemidvsmusayev/Chatify-firebase/blob/master/assets/screens/6.png" width="300"> 

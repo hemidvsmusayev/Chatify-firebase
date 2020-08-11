@@ -1,7 +1,8 @@
 # Chatify
 
 Clean code with beautiful UI chat app using firebase database.
-Note: I removed google-services.json under android/app for security reason. You can add your own and run.
+
+❗ Note: I removed google-services.json under android/app for security reason. You can add your own and run.
 
 ✔ Current ver. : 1.2.0 -stable
 ✔ Last updated : 06.08.2020
